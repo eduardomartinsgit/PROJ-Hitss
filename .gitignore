@@ -1,1 +1,17 @@
 /.metadata/
+/.recommenders/
+PROJ-Hitss/.classpath
+PROJ-Hitss/.project
+PROJ-Hitss/.settings/.jsdtscope
+*.prefs
+PROJ-Hitss/.settings/org.eclipse.wst.common.component
+PROJ-Hitss/.settings/org.eclipse.wst.common.project.facet.core.xml
+PROJ-Hitss/.settings/org.eclipse.wst.jsdt.ui.superType.container
+PROJ-Hitss/.settings/org.eclipse.wst.jsdt.ui.superType.name
+Servers/.project
+Servers/Tomcat v8.5 Server at localhost-config/catalina.policy
+Servers/Tomcat v8.5 Server at localhost-config/catalina.properties
+Servers/Tomcat v8.5 Server at localhost-config/context.xml
+Servers/Tomcat v8.5 Server at localhost-config/server.xml
+Servers/Tomcat v8.5 Server at localhost-config/tomcat-users.xml
+Servers/Tomcat v8.5 Server at localhost-config/web.xml
