@@ -26,16 +26,15 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 		// TODO Auto-generated method stub
 	}
 
+	@SuppressWarnings("unchecked")
 	public ProdutoVO obterProduto(String nomeProduto) {
-		@SuppressWarnings("unchecked")
 		ProdutoVO produtos = jdbcTemplate.queryForObject("SELECT P.id, P.nome, P.preco, P.quantidade, P.data_inclusao, P.data_ultima_alteracao, P.usuario FROM Produtos P WHERE P.nome = " + nomeProduto, new ProdutoRowMapper());
 		return produtos;
 	}
 
-	@Override
 	public List<ProdutoVO> obterTodosProdutos() {
-		// TODO Auto-generated method stub
-		return null;
+		List<ProdutoVO> produtos = jdbcTemplate.query("SELECT P.id, P.nome, P.preco, P.quantidade, P.data_inclusao, P.data_ultima_alteracao, P.usuario FROM Produtos P", new BeanPropertyRowMapper<>(ProdutoVO.class));
+		return produtos;
 	}
 
 	@Override

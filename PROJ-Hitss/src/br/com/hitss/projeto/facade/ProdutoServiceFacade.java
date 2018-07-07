@@ -1,5 +1,7 @@
 package br.com.hitss.projeto.facade;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +19,12 @@ public class ProdutoServiceFacade {
 	{
 		
 		return produtoDAO.obterProduto(nomeProduto);		
+		
+	}
+	
+	public List<ProdutoVO> obterTodosProdutos(){
+		
+		return produtoDAO.obterTodosProdutos();
 		
 	}
 }
