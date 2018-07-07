@@ -13,6 +13,8 @@
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>			
 	</head>
 	<body>
-		<h1>HELLO WORLD!!</h1>
+		<div>
+		
+		</div>
 	</body>
 </html>

@@ -1,6 +1,7 @@
 package br.com.hitss.projeto.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Clase responsável por mapear os atributos(capacidades) que um produto possui.
@@ -8,16 +9,19 @@ import java.io.Serializable;
  * @author Eduardo Martins
  *
  */
-public class ProdutoVO implements Serializable	{
+public class ProdutoVO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7265753837535183495L;
 	private Integer id;
-	private String nomeProduto;
-	private Double precoProduto;
+	private String nome;
+	private Double preco;
 	private Integer quantidade;
+	private Date data_inclusao;
+	private Date data_ultima_alteracao;
+	private String usuario;
 
 	public Integer getId() {
 		return id;
@@ -27,20 +31,20 @@ public class ProdutoVO implements Serializable	{
 		this.id = id;
 	}
 
-	public String getNomeProduto() {
-		return nomeProduto;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeProduto(String nomeProduto) {
-		this.nomeProduto = nomeProduto;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public Double getPrecoProduto() {
-		return precoProduto;
+	public Double getPreco() {
+		return preco;
 	}
 
-	public void setPrecoProduto(Double precoProduto) {
-		this.precoProduto = precoProduto;
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 
 	public Integer getQuantidade() {
@@ -49,6 +53,30 @@ public class ProdutoVO implements Serializable	{
 
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	public Date getData_inclusao() {
+		return data_inclusao;
+	}
+
+	public void setData_inclusao(Date data_inclusao) {
+		this.data_inclusao = data_inclusao;
+	}
+
+	public Date getData_ultima_alteracao() {
+		return data_ultima_alteracao;
+	}
+
+	public void setData_ultima_alteracao(Date data_ultima_alteracao) {
+		this.data_ultima_alteracao = data_ultima_alteracao;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 }
