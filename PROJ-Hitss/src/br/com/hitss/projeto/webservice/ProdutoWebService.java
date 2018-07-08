@@ -112,17 +112,19 @@ public class ProdutoWebService {
 	@Path("/comprarProduto")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<String> comprarProduto(@QueryParam("nomeComprador") String nomeComprador, @QueryParam("emailComprador") String emailComprador, @QueryParam("quantidade") Integer quantidade, @QueryParam("cidadeComprador") String cidadeComprador, @QueryParam("telefoneComprador") String telefoneComprador) {
+	public List<String> comprarProduto(@QueryParam("idProduto") Integer idProduto, @QueryParam("nomeComprador") String nomeComprador, @QueryParam("emailComprador") String emailComprador, @QueryParam("quantidade") Integer quantidade, @QueryParam("quantidadeRestante") Integer quantidadeRestante, @QueryParam("cidadeComprador") String cidadeComprador, @QueryParam("telefoneComprador") String telefoneComprador) {
 		
 		List<String> erros = new ArrayList<>();
 		
-		validarCamposCompra(nomeComprador, emailComprador, quantidade, cidadeComprador, telefoneComprador, erros);			
+		validarCamposCompra(idProduto, nomeComprador, emailComprador, quantidade, cidadeComprador, telefoneComprador, quantidadeRestante, erros);			
+		
+		System.out.println("TESTE");
 		
 		if(!erros.isEmpty()) {
 			return erros;
 		}
 		
-		CompraVO compra = popularDados(nomeComprador, emailComprador, quantidade, cidadeComprador, telefoneComprador);
+		CompraVO compra = popularDados(idProduto, nomeComprador, emailComprador, quantidade, cidadeComprador, telefoneComprador, quantidadeRestante);
 		compra.setDataCompra(new Date());
 		
 		messageSender.sendMessage(compra);
@@ -145,13 +147,15 @@ public class ProdutoWebService {
 		return produto;
 	}
 	
-	private CompraVO popularDados(String nomeComprador, String emailComprador, Integer quantidade, String cidadeComprador, String telefoneComprador) {
+	private CompraVO popularDados(Integer idProduto, String nomeComprador, String emailComprador, Integer quantidade, String cidadeComprador, String telefoneComprador, Integer quantidadeRestante) {
 		CompraVO compra = new CompraVO();
 		compra.setNomeComprador(nomeComprador);
 		compra.setEmailComprador(emailComprador);
 		compra.setQuantidade(quantidade);
 		compra.setTelefoneComprador(telefoneComprador);
 		compra.setCidadeComprador(cidadeComprador);
+		compra.setQuantidadeRestante(quantidadeRestante);
+		compra.setIdProduto(idProduto);
 		return compra;
 	}
 
@@ -175,22 +179,28 @@ public class ProdutoWebService {
 	}
 
 	
-	private void validarCamposCompra(String nomeComprador, String emailComprador, Integer quantidade, String cidadeComprador, String telefoneComprador, List<String> erros) {
+	private void validarCamposCompra(Integer idProduto, String nomeComprador, String emailComprador, Integer quantidade, String cidadeComprador, String telefoneComprador,  Integer quantidadeRestante, List<String> erros) {
 		if(nomeComprador == null || nomeComprador.isEmpty()) {
-			erros.add("O campo Nome do Produto deve ser preenchido!");
+			erros.add("O campo Nome do Comprador deve ser preenchido!");
 		}
 		if(emailComprador == null || emailComprador.isEmpty()) {
-			erros.add("O campo Preço do Produto deve ser preenchido!");
+			erros.add("O campo Email do Comprador deve ser preenchido!");
 		}		
 		if(quantidade == null || quantidade.equals(new Integer(0))) {
 			erros.add("O campo Quantidade deve ser preenchido!");
 		}	
 		if(cidadeComprador == null || cidadeComprador.isEmpty()) {
-			erros.add("O campo Usuario deve ser preenchido!");
+			erros.add("O campo Cidade deve ser preenchido!");
 		}		
 		if(telefoneComprador == null || telefoneComprador.isEmpty()) {
-			erros.add("O campo Status do Produto deve ser preenchido!");
+			erros.add("O campo Telefone do Comprador deve ser preenchido!");
 		}
+		if(idProduto == null || idProduto.equals(new Integer(0))) {
+			erros.add("O campo ID do Produto deve ser preenchido!");
+		}		
+		if(quantidadeRestante == null || (quantidadeRestante.compareTo(new Integer(0)) < 0)) {
+			erros.add("Não é possível comprar a quantidade desejada");
+		}		
 	}	
 	
 }

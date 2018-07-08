@@ -55,7 +55,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 	public synchronized void comprarProduto(CompraVO compra) {
 		LOGGER.debug("REALIZANDO COMPRA DO PRODUTO - ID: " + compra.getIdProduto() + " QUANTIDADE: " + compra.getQuantidade());
 		
-		jdbcTemplate.update("UPDATE Produtos SET quantidade = ? WHERE id = ?", new Object[] { compra.getQuantidade(), compra.getIdProduto() });
+		jdbcTemplate.update("UPDATE Produtos SET quantidade = ? WHERE id = ?", new Object[] { compra.getQuantidadeRestante(), compra.getIdProduto() });
 		jdbcTemplate.update("INSERT INTO Compras (nome_comprador, email_comprador, telefone, data_compra, id_produto, quantidade) VALUES (?, ?, ?, ?, ?, ?);", new Object[] {compra.getNomeComprador(), compra.getEmailComprador(), compra.getTelefoneComprador(), compra.getDataCompra(), compra.getIdProduto(), compra.getQuantidade() });
 		
 	}

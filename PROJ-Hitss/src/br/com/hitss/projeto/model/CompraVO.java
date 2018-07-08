@@ -16,6 +16,7 @@ public class CompraVO implements Serializable {
 	private Integer quantidade;
 	private Integer idProduto;
 	private String cidadeComprador;
+	private Integer quantidadeRestante;
 
 	public String getNomeComprador() {
 		return nomeComprador;
@@ -71,6 +72,14 @@ public class CompraVO implements Serializable {
 
 	public void setCidadeComprador(String cidadeComprador) {
 		this.cidadeComprador = cidadeComprador;
+	}
+
+	public Integer getQuantidadeRestante() {
+		return quantidadeRestante;
+	}
+
+	public void setQuantidadeRestante(Integer quantidadeRestante) {
+		this.quantidadeRestante = quantidadeRestante;
 	}
 
 }

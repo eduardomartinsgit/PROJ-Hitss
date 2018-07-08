@@ -95,11 +95,11 @@
 		    	$("#inputNomeProdutoComprar").val(nomeProduto);
 		    	$("#inputPrecoComprar").val(preco);
 		    	$("#inputIdComprar").val(id);
-		    	$("#inputQuantidadeComprar").val(id);
+		    	$("#inputQuantidadeComprar").val(quantidade);
 
 		    	if(quantidade != 0){
 			    	for(var i = 1; i <= quantidade; i++){
-			    		$("#inputSelectComprar").append("<option value='" + i + "'>" + i + "</option>")
+			    		$("#inputQuantidadeComprador").append("<option value='" + i + "'>" + i + "</option>")
 			    	}
 		    	} 
 		    	
@@ -113,9 +113,18 @@
 	    		});			    	
 		    }	
 		    function comprarProduto(){
+		    	
+		    	var idProduto = $("#inputIdComprar").val();
+		    	var nomeComprador = $("#inputNomeComprador").val() + " " + $("#inputSobrenomeComprador").val();
+		    	var emailComprador = $("#inputEmailComprador").val();
+		    	var telefone = $("#inputTelefoneComprador").val();
+		    	var cidadeComprador = $("#inputCidadeComprador").val();
+		    	var quantidadeComprada = $("#inputQuantidadeComprador").val();
+		    	var quantidadeRestante = $("#inputQuantidadeComprar").val() - quantidadeComprada;
+		    	
 		    	$.ajax({
 	    		  type: "POST",
-	    		  url: "rest/produto/comprarProduto?nomeComprador=" + $("#inputNomeComprador").val() + $("#inputSobrenomeComprador").val() + "&emailComprador=" + $("#inputEmailComprador").val() + "&telefoneComprador=" + $("#inputTelefoneComprador").val() + "&cidadeComprador=" + $("#inputCidadeComprador").val() + "&quantidade=" + $("#inputQuantidadeComprador").val(),
+	    		  url: "rest/produto/comprarProduto?idProduto=" +idProduto+ "&nomeComprador=" + nomeComprador + "&emailComprador=" + emailComprador + "&telefoneComprador=" + telefone + "&cidadeComprador=" + cidadeComprador + "&quantidade=" + quantidadeComprada + "&quantidadeRestante=" + quantidadeRestante,
 	    		  success: function(){location.reload();},
 	    		  error: function(){location.reload();},
 	    		});			    	
@@ -245,32 +254,32 @@
 			  </div>			
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
-			      <label for="inputNome">Nome</label>
-			      <input type="text" class="form-control" id="inputNome" placeholder="Nome">
+			      <label for="inputNomeComprador">Nome</label>
+			      <input type="text" class="form-control" id="inputNomeComprador" placeholder="Nome">
 			    </div>
 			    <div class="form-group col-md-6">
-			      <label for="inputSobrenome">Sobrenome</label>
-			      <input type="text" class="form-control" id="inputSobrenome" placeholder="Sobrenome">
+			      <label for="inputSobrenomeComprador">Sobrenome</label>
+			      <input type="text" class="form-control" id="inputSobrenomeComprador" placeholder="Sobrenome">
 			    </div>
 			  </div>			
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
-			      <label for="inputEmail">Email</label>
-			      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+			      <label for="inputEmailComprador">Email</label>
+			      <input type="email" class="form-control" id="inputEmailComprador" placeholder="Email">
 			    </div>
 			    <div class="form-group col-md-6">
-			      <label for="inputTelefone">Telefone</label>
-			      <input type="text" class="form-control" id="inputTelefone" placeholder="Telefone" required="required" name="numbers" pattern="[0-9]+$" >
+			      <label for="inputTelefoneComprador">Telefone</label>
+			      <input type="text" class="form-control" id="inputTelefoneComprador" placeholder="Telefone" required="required" name="numbers" pattern="[0-9]+$" >
 			    </div>			    
 			  </div>
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
-			      <label for="inputCidade">Cidade</label>
-			      <input type="text" class="form-control" id="inputCidade" pattern="[a-z\s]+$">
+			      <label for="inputCidadeComprador">Cidade</label>
+			      <input type="text" class="form-control" id="inputCidadeComprador" pattern="[a-z\s]+$">
 			    </div>
 			    <div class="form-group col-md-6">
-			      <label for="inputSelectComprar">Quantidade</label>
-			      <select id="inputSelectComprar" class="form-control">
+			      <label for="inputQuantidadeComprador">Quantidade</label>
+			      <select id="inputQuantidadeComprador" class="form-control">
 			      </select>
 			    </div>
 			  </div>
