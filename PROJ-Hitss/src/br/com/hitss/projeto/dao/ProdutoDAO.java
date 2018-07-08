@@ -1,5 +1,6 @@
 package br.com.hitss.projeto.dao;
 
+import java.text.ParseException;
 import java.util.List;
 
 import br.com.hitss.projeto.model.ProdutoVO;
@@ -15,7 +16,7 @@ public interface ProdutoDAO {
 	 * Método responsável por incluir um novo produto no estoque.
 	 * @param pedido
 	 */
-	public void incluirPedido(ProdutoVO pedido);
+	public void incluirProduto(ProdutoVO pedido);
 	
 	/**
 	 * Método responsável por obter um produto a partir de seu nome(descrição).
@@ -26,9 +27,11 @@ public interface ProdutoDAO {
 	
 	/**
 	 * Método responsável por obter todos os produtos cadastrados no estoque.
+	 * @param produtosAtivos - Flag responsável por controlar se o método retornará apenas pedidos ativos
 	 * @return
+	 * @throws ParseException 
 	 */
-	public List<ProdutoVO> obterTodosProdutos();
+	public List<ProdutoVO> obterTodosProdutos(boolean produtosAtivos);
 	
 	/**
 	 * Método responsável por atualizar as informações de um determinado produto.

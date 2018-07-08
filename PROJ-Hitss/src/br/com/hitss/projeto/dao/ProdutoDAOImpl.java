@@ -21,32 +21,31 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;	
 	
-	@Override
-	public void incluirPedido(ProdutoVO pedido) {
-		// TODO Auto-generated method stub
+	public void incluirProduto(ProdutoVO produto) {
+		jdbcTemplate.update("INSERT INTO Produtos (nome, preco, quantidade, data_inclusao, data_ultima_alteracao, usuario, status) VALUES (?, ?, ?, ?, ?, ?, ?)", new Object[] { produto.getNome(), produto.getPreco(), produto.getQuantidade(), produto.getData_inclusao(), produto.getData_inclusao(), produto.getUsuario(), produto.getStatus()});
 	}
 
-	@SuppressWarnings("unchecked")
 	public ProdutoVO obterProduto(String nomeProduto) {
-		ProdutoVO produtos = jdbcTemplate.queryForObject("SELECT P.id, P.nome, P.preco, P.quantidade, P.data_inclusao, P.data_ultima_alteracao, P.usuario FROM Produtos P WHERE P.nome = " + nomeProduto, new ProdutoRowMapper());
+		ProdutoVO produtos = jdbcTemplate.queryForObject("SELECT P.id, P.nome, P.preco, P.quantidade, P.data_inclusao, P.data_ultima_alteracao, P.usuario FROM Produtos P WHERE P.nome = " + nomeProduto, new ProdutoRowMapper());	
 		return produtos;
 	}
 
-	public List<ProdutoVO> obterTodosProdutos() {
-		List<ProdutoVO> produtos = jdbcTemplate.query("SELECT P.id, P.nome, P.preco, P.quantidade, P.data_inclusao, P.data_ultima_alteracao, P.usuario FROM Produtos P", new BeanPropertyRowMapper<>(ProdutoVO.class));
+	public List<ProdutoVO> obterTodosProdutos(boolean produtosAtivos) {
+		StringBuffer query = new StringBuffer();
+		query.append("SELECT P.id, P.nome, P.preco, P.quantidade, P.data_inclusao, P.data_ultima_alteracao, P.usuario FROM Produtos P");
+		if(produtosAtivos) {
+			query.append(" WHERE P.status = 'A'");
+		}
+		List<ProdutoVO> produtos = jdbcTemplate.query(query.toString(), new BeanPropertyRowMapper<>(ProdutoVO.class));
 		return produtos;
 	}
 
-	@Override
 	public void atualizarProduto(ProdutoVO produto) {
-		// TODO Auto-generated method stub
-		
+		jdbcTemplate.update("UPDATE Produtos SET nome = ?, preco = ?, quantidade = ?, data_ultima_alteracao = ?, usuario = ?, status = ? WHERE id = ?", new Object[] { produto.getNome(), produto.getPreco(), produto.getQuantidade(), produto.getData_ultima_alteracao(), produto.getUsuario(), produto.getStatus(), produto.getId()});		
 	}
 
-	@Override
 	public void removerProduto(ProdutoVO produto) {
-		// TODO Auto-generated method stub
-		
+		jdbcTemplate.update("UPDATE Produtos SET status = 'I' WHERE id = ?", new Object[] {produto.getId()});
 	}
 
 	@Override

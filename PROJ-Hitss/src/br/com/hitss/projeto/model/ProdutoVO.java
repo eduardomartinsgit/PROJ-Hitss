@@ -22,6 +22,7 @@ public class ProdutoVO implements Serializable {
 	private Date data_inclusao;
 	private Date data_ultima_alteracao;
 	private String usuario;
+	private String status;
 
 	public Integer getId() {
 		return id;
@@ -55,6 +56,22 @@ public class ProdutoVO implements Serializable {
 		this.quantidade = quantidade;
 	}
 
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Date getData_inclusao() {
 		return data_inclusao;
 	}
@@ -69,14 +86,6 @@ public class ProdutoVO implements Serializable {
 
 	public void setData_ultima_alteracao(Date data_ultima_alteracao) {
 		this.data_ultima_alteracao = data_ultima_alteracao;
-	}
-
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
 	}
 
 }

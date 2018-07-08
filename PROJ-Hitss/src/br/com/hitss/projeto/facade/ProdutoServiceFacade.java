@@ -17,14 +17,14 @@ public class ProdutoServiceFacade {
 	
 	public ProdutoVO obterProduto(String nomeProduto)
 	{
-		
+			
 		return produtoDAO.obterProduto(nomeProduto);		
 		
 	}
 	
 	public List<ProdutoVO> obterTodosProdutos(){
 		
-		return produtoDAO.obterTodosProdutos();
+		return produtoDAO.obterTodosProdutos(true);
 		
 	}
 }
