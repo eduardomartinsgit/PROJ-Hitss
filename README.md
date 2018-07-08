@@ -4,8 +4,8 @@
 
 <br>
 <br>
-Projeto para avaliação no processo seletivo da empresa Global Hitss. <br>
-A ideia do projeto implementar um serviço web REST e um cliente que possa consumir tal serviço.
+Projeto para avaliação no processo seletivo da empresa Global Hitss. <br><br>
+A ideia do projeto implementar um serviço web REST e um cliente que possa consumir tal serviço.<br><br>
 <br>Considere o cenário de cadastro de produtos para uma loja virtual. 
 <br>
 <br>
@@ -21,7 +21,6 @@ A ideia do projeto implementar um serviço web REST e um cliente que possa consu
 |Manuseio do Banco de Dados |`Spring JDBC`|
 |Criação de Arquivos de Log           |`Log4J`|
 |Ferramenta de Automação de Compilação      |`Apache Maven`|
-|Framework Front-End      |`AngularJS`|
 |Framework Front-End      |`BootStrap`|
 |Container de Servlet/Servidor de Aplicação |`Apache TomCat`|
 |Banco de Dados                             |`MySQL`|
