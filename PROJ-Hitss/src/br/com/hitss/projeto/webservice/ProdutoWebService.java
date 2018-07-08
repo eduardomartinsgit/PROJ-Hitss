@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.hitss.projeto.dao.ProdutoDAO;
 import br.com.hitss.projeto.model.ProdutoVO;
+import br.com.hitss.projeto.queue.producer.MessageSender;
 
 /**
  * Classe responsável por prover os serviços de inclusão, remoção, busca, atualização e compra de produtos.
@@ -29,6 +30,9 @@ public class ProdutoWebService {
 	
 	@Autowired
 	private ProdutoDAO produtoDAO;
+	
+	@Autowired
+    MessageSender messageSender;
 	
 	@GET
 	@Path("/obterProduto")	
@@ -68,7 +72,7 @@ public class ProdutoWebService {
 		ProdutoVO produto = popularDados(nomeProduto, precoProduto, quantidade, usuario, statusProduto);
 		produto.setData_inclusao(new Date());
 		
-		produtoDAO.incluirProduto(produto);
+		messageSender.sendMessage(produto);
 		
 		return erros;
 	}
@@ -104,7 +108,6 @@ public class ProdutoWebService {
 		produtoDAO.removerProduto(produto);
 		
 	}
-	
 	
 	private ProdutoVO popularDados(String nomeProduto, String precoProduto, String quantidade, String usuario,String statusProduto) {
 		ProdutoVO produto = new ProdutoVO();

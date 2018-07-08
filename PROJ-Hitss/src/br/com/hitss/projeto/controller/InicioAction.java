@@ -1,6 +1,8 @@
 package br.com.hitss.projeto.controller;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +18,9 @@ public class InicioAction {
 	private ProdutoDAO produtoDAO;
 	
 	@RequestMapping("/")
-	public ModelAndView inicio() {
+	public ModelAndView inicio() throws IOException, TimeoutException {
 		ModelAndView mv = new ModelAndView("pagina-inicial");
-		
 		List<ProdutoVO> produtos = produtoDAO.obterTodosProdutos(true);
-		
 		mv.addObject("produtos", produtos);	
 		return mv;
 	}
