@@ -57,11 +57,11 @@
 			} );
 		    function incluirProduto(){
 		    	$.ajax({
-		    		  type: "POST",
-		    		  url: "rest/produto/incluirProduto?nome=" + $("#inputNomeProduto").val() + "&preco=" + $("#inputPreco").val() + "&quantidade=" + $("#inputQuantidade").val() + "&usuario=" + $("#inputUsuario").val() + "&status=" + $("#inputStatus").val(),
-		    		  success: function(){location.reload();},
-		    		  error: function(){location.reload();},
-		    		});			    	
+	    		  type: "POST",
+	    		  url: "rest/produto/incluirProduto?nome=" + $("#inputNomeProduto").val() + "&preco=" + $("#inputPreco").val() + "&quantidade=" + $("#inputQuantidade").val() + "&usuario=" + $("#inputUsuario").val() + "&status=" + $("#inputStatus").val(),
+	    		  success: function(){location.reload();},
+	    		  error: function(){location.reload();},
+	    		});			    	
 		    }
 		    function abrirAlterarProduto(id, nomeProduto, preco, quantidade, status){
 		    	$("#inputNomeProdutoAlterar").val(nomeProduto);
@@ -72,11 +72,11 @@
 		    }
 		    function alterarProduto(){
 		    	$.ajax({
-		    		  type: "PUT",
-		    		  url: "rest/produto/alterarProduto?nome=" + $("#inputNomeProdutoAlterar").val() + "&preco=" + $("#inputPrecoAlterar").val() + "&quantidade=" + $("#inputQuantidadeAlterar").val() + "&usuario=" + $("#inputUsuarioAlterar").val() + "&status=" + $("#inputStatusAlterar").val() + "&id=" + $("#inputIdAlterar").val(),
-		    		  success: function(dados){location.reload();},
-		    		  error: function(erro){location.reload();},
-		    		});			    	
+	    		  type: "PUT",
+	    		  url: "rest/produto/alterarProduto?nome=" + $("#inputNomeProdutoAlterar").val() + "&preco=" + $("#inputPrecoAlterar").val() + "&quantidade=" + $("#inputQuantidadeAlterar").val() + "&usuario=" + $("#inputUsuarioAlterar").val() + "&status=" + $("#inputStatusAlterar").val() + "&id=" + $("#inputIdAlterar").val(),
+	    		  success: function(dados){location.reload();},
+	    		  error: function(erro){location.reload();},
+	    		});			    	
 		    }		    
 		    function abrirRemoverProduto(id, nomeProduto, preco){
 		    	$("#inputNomeProdutoRemover").val(nomeProduto);
@@ -85,11 +85,11 @@
 		    }
 		    function removerProduto(){
 		    	$.ajax({
-		    		  type: "DELETE",
-		    		  url: "rest/produto/removerProduto?&id=" + $("#inputIdRemover").val(),
-		    		  success: function(dados){location.reload();},
-		    		  error: function(erro){location.reload();},
-		    		});			    	
+	    		  type: "DELETE",
+	    		  url: "rest/produto/removerProduto?&id=" + $("#inputIdRemover").val(),
+	    		  success: function(dados){location.reload();},
+	    		  error: function(erro){location.reload();},
+	    		});			    	
 		    }	
 		    function abrirComprarProduto(id, nomeProduto, preco, quantidade){
 		    	$("#inputNomeProdutoComprar").val(nomeProduto);
@@ -106,11 +106,19 @@
 		    }
 		    function removerProduto(){
 		    	$.ajax({
-		    		  type: "DELETE",
-		    		  url: "rest/produto/removerProduto?&id=" + $("#inputIdRemover").val(),
-		    		  success: function(dados){location.reload();},
-		    		  error: function(erro){location.reload();},
-		    		});			    	
+	    		  type: "DELETE",
+	    		  url: "rest/produto/removerProduto?&id=" + $("#inputIdRemover").val(),
+	    		  success: function(dados){location.reload();},
+	    		  error: function(erro){location.reload();},
+	    		});			    	
+		    }	
+		    function comprarProduto(){
+		    	$.ajax({
+	    		  type: "POST",
+	    		  url: "rest/produto/comprarProduto?nomeComprador=" + $("#inputNomeComprador").val() + $("#inputSobrenomeComprador").val() + "&emailComprador=" + $("#inputEmailComprador").val() + "&telefoneComprador=" + $("#inputTelefoneComprador").val() + "&cidadeComprador=" + $("#inputCidadeComprador").val() + "&quantidade=" + $("#inputQuantidadeComprador").val(),
+	    		  success: function(){location.reload();},
+	    		  error: function(){location.reload();},
+	    		});			    	
 		    }		    
 		</script>	
 	</head>
@@ -270,7 +278,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-	        <button type="button" class="btn btn-primary">Comprar</button>
+	        <button onclick="javascript:comprarProduto();" type="button" class="btn btn-primary">Comprar</button>
 	      </div>
 	    </div>
 	  </div>

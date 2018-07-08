@@ -3,6 +3,7 @@ package br.com.hitss.projeto.dao;
 import java.text.ParseException;
 import java.util.List;
 
+import br.com.hitss.projeto.model.CompraVO;
 import br.com.hitss.projeto.model.ProdutoVO;
 
 /**
@@ -16,7 +17,7 @@ public interface ProdutoDAO {
 	 * Método responsável por incluir um novo produto no estoque.
 	 * @param pedido
 	 */
-	public void incluirProduto(ProdutoVO pedido);
+	public void incluirProduto(ProdutoVO produto);
 	
 	/**
 	 * Método responsável por obter um produto a partir de seu nome(descrição).
@@ -49,5 +50,5 @@ public interface ProdutoDAO {
 	 * Método responsável por realizar a compra de um determinado produto disponivel no estoque.
 	 * @param produto
 	 */
-	public void comprarProduto(ProdutoVO produto);
+	public void comprarProduto(CompraVO compra);
 }

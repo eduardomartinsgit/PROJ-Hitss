@@ -9,7 +9,7 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 import br.com.hitss.projeto.dao.ProdutoDAO;
-import br.com.hitss.projeto.model.ProdutoVO;
+import br.com.hitss.projeto.model.CompraVO;
  
 @Component
 public class MessageReceiver {
@@ -21,7 +21,7 @@ public class MessageReceiver {
     private static final String QUEUE_COMPRAR_PRODUTO = "FL.HITSS.COMPRAR.PRODUTO";
     
     @JmsListener(destination = QUEUE_COMPRAR_PRODUTO)
-    public void receberMensagemCompra(final ProdutoVO produto) throws JMSException {
-    	produtoDAO.comprarProduto(produto);
+    public void receberMensagemCompra(final CompraVO compra) throws JMSException {
+    	produtoDAO.comprarProduto(compra);
     }    
 }

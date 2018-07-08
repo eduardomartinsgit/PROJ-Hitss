@@ -10,7 +10,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 
-import br.com.hitss.projeto.model.ProdutoVO;
+import br.com.hitss.projeto.model.CompraVO;
  
  
 @Component
@@ -19,12 +19,12 @@ public class MessageSender {
     @Autowired
     JmsTemplate jmsTemplate;
  
-    public void sendMessage(final ProdutoVO produto) {
+    public void sendMessage(final CompraVO compra) {
  
         jmsTemplate.send(new MessageCreator(){
                 @Override
                 public Message createMessage(Session session) throws JMSException{
-                    ObjectMessage objectMessage = session.createObjectMessage(produto);
+                    ObjectMessage objectMessage = session.createObjectMessage(compra);
                     return objectMessage;
                 }
             });

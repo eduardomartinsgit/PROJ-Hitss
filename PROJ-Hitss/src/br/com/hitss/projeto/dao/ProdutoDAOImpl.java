@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import br.com.hitss.projeto.model.CompraVO;
 import br.com.hitss.projeto.model.ProdutoVO;
 
 @Repository
@@ -21,7 +22,8 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;	
 	
-	public void incluirProduto(ProdutoVO produto) {
+	public synchronized void incluirProduto(ProdutoVO produto) {
+		LOGGER.debug("INSERINDO O PRODUTO NO ESTOQUE: " + produto.getNome());
 		jdbcTemplate.update("INSERT INTO Produtos (nome, preco, quantidade, data_inclusao, data_ultima_alteracao, usuario, status) VALUES (?, ?, ?, ?, ?, ?, ?)", new Object[] { produto.getNome(), produto.getPreco(), produto.getQuantidade(), produto.getData_inclusao(), produto.getData_inclusao(), produto.getUsuario(), produto.getStatus()});
 	}
 
@@ -40,17 +42,21 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 		return produtos;
 	}
 
-	public void atualizarProduto(ProdutoVO produto) {
+	public synchronized void atualizarProduto(ProdutoVO produto) {
+		LOGGER.debug("ATUALIZANDO O PRODUTO NO ESTOQUE: " + produto.getNome());
 		jdbcTemplate.update("UPDATE Produtos SET nome = ?, preco = ?, quantidade = ?, data_ultima_alteracao = ?, usuario = ?, status = ? WHERE id = ?", new Object[] { produto.getNome(), produto.getPreco(), produto.getQuantidade(), produto.getData_ultima_alteracao(), produto.getUsuario(), produto.getStatus(), produto.getId()});		
 	}
 
-	public void removerProduto(ProdutoVO produto) {
+	public synchronized void removerProduto(ProdutoVO produto) {
+		LOGGER.debug("REMOVENDO O PRODUTO DO ESTOQUE: " + produto.getNome());
 		jdbcTemplate.update("UPDATE Produtos SET status = 'I' WHERE id = ?", new Object[] {produto.getId()});
 	}
 
-	@Override
-	public void comprarProduto(ProdutoVO produto) {
-		// TODO Auto-generated method stub
+	public synchronized void comprarProduto(CompraVO compra) {
+		LOGGER.debug("REALIZANDO COMPRA DO PRODUTO - ID: " + compra.getIdProduto() + " QUANTIDADE: " + compra.getQuantidade());
+		
+		jdbcTemplate.update("UPDATE Produtos SET quantidade = ? WHERE id = ?", new Object[] { compra.getQuantidade(), compra.getIdProduto() });
+		jdbcTemplate.update("INSERT INTO Compras (nome_comprador, email_comprador, telefone, data_compra, id_produto, quantidade) VALUES (?, ?, ?, ?, ?, ?);", new Object[] {compra.getNomeComprador(), compra.getEmailComprador(), compra.getTelefoneComprador(), compra.getDataCompra(), compra.getIdProduto(), compra.getQuantidade() });
 		
 	}
 

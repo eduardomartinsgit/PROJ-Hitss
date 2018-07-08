@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.hitss.projeto.dao.ProdutoDAO;
+import br.com.hitss.projeto.model.CompraVO;
 import br.com.hitss.projeto.model.ProdutoVO;
 import br.com.hitss.projeto.queue.producer.MessageSender;
 
@@ -63,7 +64,7 @@ public class ProdutoWebService {
 		
 		List<String> erros = new ArrayList<>();
 		
-		validarCampos(nomeProduto, precoProduto, quantidade, usuario, statusProduto, erros);			
+		validarCamposProduto(nomeProduto, precoProduto, quantidade, usuario, statusProduto, erros);			
 		
 		if(!erros.isEmpty()) {
 			return erros;
@@ -71,8 +72,6 @@ public class ProdutoWebService {
 		
 		ProdutoVO produto = popularDados(nomeProduto, precoProduto, quantidade, usuario, statusProduto);
 		produto.setData_inclusao(new Date());
-		
-		messageSender.sendMessage(produto);
 		
 		return erros;
 	}
@@ -84,7 +83,7 @@ public class ProdutoWebService {
 	public List<String> alterarProduto(@QueryParam("nome") String nomeProduto, @QueryParam("preco") String precoProduto, @QueryParam("quantidade") String quantidade, @QueryParam("usuario") String usuario, @QueryParam("status") String statusProduto, @QueryParam("id") String idProduto) {
 		
 		List<String> erros = new ArrayList<>();
-		validarCampos(nomeProduto, precoProduto, quantidade, usuario, statusProduto, erros);			
+		validarCamposProduto(nomeProduto, precoProduto, quantidade, usuario, statusProduto, erros);			
 		
 		if(!erros.isEmpty()) {
 			return erros;
@@ -109,6 +108,30 @@ public class ProdutoWebService {
 		
 	}
 	
+	@POST
+	@Path("/comprarProduto")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<String> comprarProduto(@QueryParam("nomeComprador") String nomeComprador, @QueryParam("emailComprador") String emailComprador, @QueryParam("quantidade") Integer quantidade, @QueryParam("cidadeComprador") String cidadeComprador, @QueryParam("telefoneComprador") String telefoneComprador) {
+		
+		List<String> erros = new ArrayList<>();
+		
+		validarCamposCompra(nomeComprador, emailComprador, quantidade, cidadeComprador, telefoneComprador, erros);			
+		
+		if(!erros.isEmpty()) {
+			return erros;
+		}
+		
+		CompraVO compra = popularDados(nomeComprador, emailComprador, quantidade, cidadeComprador, telefoneComprador);
+		compra.setDataCompra(new Date());
+		
+		messageSender.sendMessage(compra);
+		
+		return erros;
+	}	
+	
+	
+	
 	private ProdutoVO popularDados(String nomeProduto, String precoProduto, String quantidade, String usuario,String statusProduto) {
 		ProdutoVO produto = new ProdutoVO();
 		produto.setNome(nomeProduto);
@@ -121,8 +144,18 @@ public class ProdutoWebService {
 		produto.setStatus(statusProduto);
 		return produto;
 	}
+	
+	private CompraVO popularDados(String nomeComprador, String emailComprador, Integer quantidade, String cidadeComprador, String telefoneComprador) {
+		CompraVO compra = new CompraVO();
+		compra.setNomeComprador(nomeComprador);
+		compra.setEmailComprador(emailComprador);
+		compra.setQuantidade(quantidade);
+		compra.setTelefoneComprador(telefoneComprador);
+		compra.setCidadeComprador(cidadeComprador);
+		return compra;
+	}
 
-	private void validarCampos(String nomeProduto, String precoProduto, String quantidade, String usuario,
+	private void validarCamposProduto(String nomeProduto, String precoProduto, String quantidade, String usuario,
 			String statusProduto, List<String> erros) {
 		if(nomeProduto == null || nomeProduto.isEmpty()) {
 			erros.add("O campo Nome do Produto deve ser preenchido!");
@@ -140,5 +173,24 @@ public class ProdutoWebService {
 			erros.add("O campo Status do Produto deve ser preenchido!");
 		}
 	}
+
+	
+	private void validarCamposCompra(String nomeComprador, String emailComprador, Integer quantidade, String cidadeComprador, String telefoneComprador, List<String> erros) {
+		if(nomeComprador == null || nomeComprador.isEmpty()) {
+			erros.add("O campo Nome do Produto deve ser preenchido!");
+		}
+		if(emailComprador == null || emailComprador.isEmpty()) {
+			erros.add("O campo Preço do Produto deve ser preenchido!");
+		}		
+		if(quantidade == null || quantidade.equals(new Integer(0))) {
+			erros.add("O campo Quantidade deve ser preenchido!");
+		}	
+		if(cidadeComprador == null || cidadeComprador.isEmpty()) {
+			erros.add("O campo Usuario deve ser preenchido!");
+		}		
+		if(telefoneComprador == null || telefoneComprador.isEmpty()) {
+			erros.add("O campo Status do Produto deve ser preenchido!");
+		}
+	}	
 	
 }
