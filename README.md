@@ -10,26 +10,25 @@ A ideia do projeto implementar um serviço web REST e um cliente que possa consu
 <br>
 <br>
 <br>
+
 |                  
 |Tecnologias Utilizadas                          |
 |-------------------------------------------|-------------------------------|
 |Linguagem de Programação:  |`Java`            |
 |Framework MVC              |`Spring MVC`            |
 |RESTful Web Services        |`Jersey`|
-|Mensageria        |`ActiveMQ`|
+|Message Broker        |`ActiveMQ`|
 |Manuseio do Banco de Dados |`Spring JDBC`|
 |Criação de Arquivos de Log           |`Log4J`|
 |Ferramenta de Automação de Compilação      |`Apache Maven`|
-|Framework Front-End      |`jQuery`|
+|Framework Front-End      |`AngularJS`|
 |Framework Front-End      |`BootStrap`|
 |Container de Servlet/Servidor de Aplicação |`Apache TomCat`|
 |Banco de Dados                             |`MySQL`|
 |Desenvolvimento de componente de Interface |`BootStrap`|
 |Ambiente de Desenvolvimento(IDE)           |`Eclipse`|
 
-<br>
-<br>
-<br>
+
 # Configurações Necessárias
 
 Abaixo, um tutorial rápido de como inicializar a aplicação PROJ-Hitss em sem ambiente de desenvolvimento.
@@ -154,3 +153,34 @@ Abaixo, um tutorial rápido de como inicializar a aplicação PROJ-Hitss em sem 
 #### Banco de Dados
 
     MySQL Community Server 5.5
+```sql
+CREATE DATABASE projetoHitss;
+use projetoHitss;
+
+CREATE TABLE Produtos (
+	id int not null auto_increment,
+	nome VARCHAR(100),
+    preco DECIMAL(6,2),
+    quantidade int,
+    data_inclusao timestamp,
+    data_ultima_alteracao timestamp,
+    usuario VARCHAR(20),
+    status VARCHAR(1) not null,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE Compras (
+	id int not null auto_increment,
+	nome_comprador VARCHAR(100),
+    email_comprador VARCHAR(100),
+    telefone bigint,
+    data_compra timestamp,
+    id_produto int,
+    quantidade int,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_produto) REFERENCES Produtos(id)
+);
+
+SELECT * FROM Produtos;
+SELECT * FROM Compras;
+```	
