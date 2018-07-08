@@ -211,7 +211,7 @@ SELECT * FROM Compras;
 	
 #### Instalação e Configuração do ActiveMQ	
 	
-> **Primeiramente:**, faça o download do [ActiveMQ 
+> **Primeiramente**, faça o download do [ActiveMQ 
 ](http://activemq.apache.org/activemq-5154-release.html)
 
 	Após realizar o download do ActiveMQ compactado em um arquivo.zip, 
@@ -221,14 +221,14 @@ SELECT * FROM Compras;
     Em seguida, navegue até a pasta **bin** e utilize o comando a seguir diretamente no prompt de comando/terminal: activemq start
 	Abra o navegador de sua preferencia e acesse o a URL http://localhost:8161 com usuario: admin e senha: admin conforme a imagem a seguir.
 	
-	![Tela inicial ActiveMQ](https://uploaddeimagens.com.br/images/001/499/797/full/MQ1.PNG?1531073748)
+![Tela inicial ActiveMQ](https://uploaddeimagens.com.br/images/001/499/797/full/MQ1.PNG?1531073748)
 
 	
 	Clique no menu **QUEUES**
      
     No menu Queue Names, digite **FL.HITSS.COMPRAR.PRODUTO** conforme a imagem a seguir.
 	
-	![Criação de Filas ActiveMQ](https://uploaddeimagens.com.br/images/001/499/802/full/MQ2.PNG?1531074019)	
+![Criação de Filas ActiveMQ](https://uploaddeimagens.com.br/images/001/499/802/full/MQ2.PNG?1531074019)	
 	
 	
 #### Configuração da Aplicação no Eclipse
