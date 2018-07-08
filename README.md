@@ -6,7 +6,7 @@
 <br>
 Projeto para avaliação no processo seletivo da empresa Global Hitss. <br>
 A ideia do projeto implementar um serviço web REST e um cliente que possa consumir tal serviço.
-<br>Considere o cenário de cadastro de produtos para uma loja virtual. A entidade produto possui as propriedades: nome, preço e quantidade
+<br>Considere o cenário de cadastro de produtos para uma loja virtual. 
 <br>
 <br>
 <br>
@@ -184,3 +184,29 @@ CREATE TABLE Compras (
 SELECT * FROM Produtos;
 SELECT * FROM Compras;
 ```	
+#### Página Inicial - Tabela de Produtos no Estoque
+    
+    http://localhost:8080/PROJ-Hitss/
+
+#### WebServices
+
+    @GET
+    http://localhost:8080/PROJ-Hitss/rest/produto/obterProduto  - Endpoint referente a obtenção de um determinado produto a partir do seu nome.
+    
+    @GET
+    http://localhost:8080/PROJ-Hitss/rest/produto/obterProdutos - Endpoint referente a obtenção de todos os produtos ativos e/ou inativos cadastrados.
+	
+    @POST
+    http://localhost:8080/PROJ-Hitss/rest/produto/incluirProduto - Endpoint referente ao cadastro de produtos no estoque.
+	
+    @POST
+    http://localhost:8080/PROJ-Hitss/rest/produto/comprarProduto - Endpoint referente a compra de um determinado produto no estoque.
+
+    @PUT
+    http://localhost:8080/PROJ-Hitss/rest/produto/alterarProduto - Endpoint referente a alteração das informações de um produto no estoque.
+
+    @DELETE
+    http://localhost:8080/PROJ-Hitss/rest/produto/removerProduto - Endpoint referente a remoção de um produto no estoque.
+	
+
+#### Configuração da Aplicação no Eclipse
