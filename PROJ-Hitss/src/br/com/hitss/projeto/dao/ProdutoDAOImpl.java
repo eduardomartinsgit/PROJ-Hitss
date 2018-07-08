@@ -34,7 +34,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 
 	public List<ProdutoVO> obterTodosProdutos(boolean produtosAtivos) {
 		StringBuffer query = new StringBuffer();
-		query.append("SELECT P.id, P.nome, P.preco, P.quantidade, P.data_inclusao, P.data_ultima_alteracao, P.usuario FROM Produtos P");
+		query.append("SELECT P.id, P.nome, P.preco, P.quantidade, P.data_inclusao, P.data_ultima_alteracao, P.usuario, P.status FROM Produtos P");
 		if(produtosAtivos) {
 			query.append(" WHERE P.status = 'A'");
 		}
@@ -49,7 +49,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 
 	public synchronized void removerProduto(ProdutoVO produto) {
 		LOGGER.debug("REMOVENDO O PRODUTO DO ESTOQUE: " + produto.getNome());
-		jdbcTemplate.update("UPDATE Produtos SET status = 'I' WHERE id = ?", new Object[] {produto.getId()});
+		jdbcTemplate.update("DELETE FROM Produtos WHERE id = ?", new Object[] {produto.getId()});
 	}
 
 	public synchronized void comprarProduto(CompraVO compra) {

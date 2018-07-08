@@ -20,7 +20,7 @@ public class InicioAction {
 	@RequestMapping("/")
 	public ModelAndView inicio() throws IOException, TimeoutException {
 		ModelAndView mv = new ModelAndView("pagina-inicial");
-		List<ProdutoVO> produtos = produtoDAO.obterTodosProdutos(true);
+		List<ProdutoVO> produtos = produtoDAO.obterTodosProdutos(false);
 		mv.addObject("produtos", produtos);	
 		return mv;
 	}
