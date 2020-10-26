@@ -10,22 +10,6 @@ A ideia do projeto implementar um serviço web REST e um cliente que possa consu
 <br>
 <br>
 
-|                  
-|Tecnologias Utilizadas                          |
-|-------------------------------------------|-------------------------------|
-|Linguagem de Programação:  |`Java`            |
-|Framework MVC              |`Spring MVC`            |
-|RESTful Web Services        |`Jersey`|
-|Message Broker        |`ActiveMQ`|
-|Manuseio do Banco de Dados |`Spring JDBC`|
-|Criação de Arquivos de Log           |`Log4J`|
-|Ferramenta de Automação de Compilação      |`Apache Maven`|
-|Framework Front-End      |`BootStrap`|
-|Container de Servlet/Servidor de Aplicação |`Apache TomCat`|
-|Banco de Dados                             |`MySQL`|
-|Desenvolvimento de componente de Interface |`BootStrap`|
-|Ambiente de Desenvolvimento(IDE)           |`Eclipse`|
-
 
 # Configurações Necessárias
 
